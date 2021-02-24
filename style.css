@@ -1,27 +1,33 @@
 html {
   height: 100%;
   font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
   height: 100%;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+#clear {
+  display: block;
+  margin: 5rem auto 0 auto;
+  height: 5rem;
+  width: 10rem;
+  border-radius: 1rem;
+  border-color:hsla(219, 79%, 10%, 0.8) ;
+  background-color: rgba(100, 149, 237, 0.8);
+  color: white;
 }
 
 #container {
+  margin: 5rem auto;
+  height: 50rem;
+  width: 50rem;
   display: grid;    
-  grid-template-columns: repeat(16, 4rem);
-  grid-template-rows: repeat(16, 4rem);
-  border-left: 0.2rem solid black;
-  border-bottom: 0.2rem solid black;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
 }
 
 .square {
-  height: 4rem;
-  width: 4rem;
-  border-top: 2px solid black;
-  border-right: 2px solid black;
+  border: 1px solid black;
 }
