@@ -1,8 +1,8 @@
 const container = document.getElementById('container');
 const clear = document.getElementById('clear');
-clear.addEventListener('click', resetGrid);
 
 defaultGrid();
+clear.addEventListener('click', resetGrid);
 
 // Create default 8x8 grid
 function defaultGrid() {  
@@ -11,20 +11,12 @@ function defaultGrid() {
     square.className = 'square';
     container.appendChild(square);
   }
-
   getGridArray();
 }
 
-// Remove grid
-function removeGrid() {
-  let squares = Array.from(container.children);
-  squares.forEach(square => square.remove());
-}
-
-// Ask the user for new grid size, remove previous grid and replace it
+// Ask the user for new grid size, remove previous grid and create new one
+// Make sure the input is of type number, and between 0 and 100
 function resetGrid() {
-
-  // Make sure the input is of type number, and between 0 and 100
   let input = parseInt('');
 
   while ((input <= 0 || input > 100) || isNaN(input)) {
@@ -38,7 +30,17 @@ function resetGrid() {
   }
 
   removeGrid();
+  createGrid(input);
+} 
 
+// Loop through the grid container's children and remove each one
+function removeGrid() {
+  let squares = Array.from(container.children);
+  squares.forEach(square => square.remove());
+}
+
+// Create new grid with user's input
+function createGrid(input) {
   let gridSize = input * input;
   
   for (i = 0; i < gridSize; i++) {
@@ -47,15 +49,15 @@ function resetGrid() {
     container.appendChild(square);     
   }
   
-  // Get the container's CSS rule from CSSOM and set columns/rows to input value
+  // Get the grid container's CSS rule from CSSOM and set columns/rows to input value
   let containerRules = document.styleSheets[0].cssRules[3].style;
   containerRules.setProperty('grid-template-columns', `repeat(${input}, 1fr)`);
   containerRules.setProperty('grid-template-rows', `repeat(${input}, 1fr)`);
 
   getGridArray();
-} 
+}
 
-// Get array from all square classes and add mouseover event
+// Get array from all square classes and add mouseover color change event
 function getGridArray() {
   let squares = Array.from(document.getElementsByClassName('square'));
   squares.forEach(square => {
