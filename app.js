@@ -24,7 +24,8 @@ function removeGrid() {
 // Ask the user for new grid size, remove previous grid and replace it
 function resetGrid() {
 
-  let input = ''; 
+  // Make sure the input is of type number, and between 0 and 100
+  let input = parseInt('');
 
   while ((input <= 0 || input > 100) || isNaN(input)) {
     input = parseInt(prompt("Please enter grid size"));
@@ -36,22 +37,25 @@ function resetGrid() {
     }
   }
 
-  let gridSize = input * input;
-
   removeGrid();
 
+  let gridSize = input * input;
+  
   for (i = 0; i < gridSize; i++) {
     let square = document.createElement('div');
     square.className = 'square';
-    container.style.cssText = `grid-template-columns: repeat(${input}, 1fr); 
-                                grid-template-rows: repeat(${input}, 1fr)`
-    container.appendChild(square);
+    container.appendChild(square);     
   }
+  
+  // Get the container's CSS rule from CSSOM and set columns/rows to input value
+  let containerRules = document.styleSheets[0].cssRules[3].style;
+  containerRules.setProperty('grid-template-columns', `repeat(${input}, 1fr)`);
+  containerRules.setProperty('grid-template-rows', `repeat(${input}, 1fr)`);
 
   getGridArray();
 } 
 
-// Change color on mouse hover
+// Get array from all square classes and add mouseover event
 function getGridArray() {
   let squares = Array.from(document.getElementsByClassName('square'));
   squares.forEach(square => {
@@ -59,6 +63,7 @@ function getGridArray() {
   });
 }
 
+// Change RGB color 
 function changeColor(e) {
   let red = Math.floor(Math.random() * 255);
   let green = Math.floor(Math.random() * 255);
