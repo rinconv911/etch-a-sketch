@@ -14,7 +14,7 @@ body {
   height: 5rem;
   width: 10rem;
   border-radius: 1rem;
-  border-color:hsla(219, 79%, 10%, 0.8) ;
+  border-color: hsla(219, 79%, 10%, 0.8) ;
   background-color: rgba(100, 149, 237, 0.8);
   color: white;
 }
