@@ -11,6 +11,8 @@ function defaultGrid() {
     square.className = 'square';
     container.appendChild(square);
   }
+
+  roundCorners(8);
   getGridArray();
 }
 
@@ -31,6 +33,7 @@ function resetGrid() {
 
   removeGrid();
   createGrid(input);
+  roundCorners(input);
 } 
 
 // Loop through the grid container's children and remove each one
@@ -72,3 +75,19 @@ function changeColor(e) {
   let blue = Math.floor(Math.random() * 255);
   e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.5)`;  
 };
+
+// Round the corners of the grid/squares
+function roundCorners(input) {
+  let squares = container.children;
+
+  let upperLeft = container.firstElementChild;
+  let upperRight = squares[input-1];
+  let lowerLeft = squares[squares.length-input];
+  let lowerRight = container.lastElementChild;
+  
+  upperLeft.style.borderRadius = '5rem 0px 0px 0px';
+  upperRight.style.borderRadius = '0px 5rem 0px 0px';
+  lowerLeft.style.borderRadius = '0px 0px 0px 5rem';
+  lowerRight.style.borderRadius = '0px 0px 5rem 0px';
+}
+
