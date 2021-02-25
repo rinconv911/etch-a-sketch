@@ -23,11 +23,19 @@ function removeGrid() {
 
 // Ask the user for new grid size, remove previous grid and replace it
 function resetGrid() {
-  let input = prompt("Please enter grid size");
 
-  if (input > 100) {
-    input = prompt("Please enter a value lower than 100");
+  let input = ''; 
+
+  while ((input <= 0 || input > 100) || isNaN(input)) {
+    input = parseInt(prompt("Please enter grid size"));
+    
+    if ((input <= 0 || input > 100)){
+      alert("Please enter a value between 0 and 100");
+    } else if (isNaN(input)) {
+      alert("Please enter a valid grid size");
+    }
   }
+
   let gridSize = input * input;
 
   removeGrid();
