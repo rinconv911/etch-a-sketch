@@ -9,10 +9,11 @@
 
 
 	<body>
-		<form>
-			<label for="clear"> Enter your grid size </label>
-			<input type="text" class="input" id="clear" placeholder="0-100" autocomplete="off">
-		</form>
+		<div id="input-div">
+			<p id="grid-prompt">Enter your grid size</p>
+			<input type="text" id="clear" placeholder="0-100" autocomplete="off" onfocus="this.value=''">
+		</div>
+		
 		<div id="container">
 
 		</div>

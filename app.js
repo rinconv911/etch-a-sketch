@@ -2,7 +2,7 @@ const container = document.getElementById('container');
 const clear = document.getElementById('clear');
 
 defaultGrid();
-clear.addEventListener('click', resetGrid);
+clear.addEventListener('change', resetGrid);
 
 // Create default 8x8 grid
 function defaultGrid() {  
@@ -19,16 +19,14 @@ function defaultGrid() {
 // Ask the user for new grid size, remove previous grid and create new one
 // Make sure the input is of type number, and between 0 and 100
 function resetGrid() {
-  let input = parseInt('');
+  let input = parseInt(clear.value);
 
-  while ((input <= 0 || input > 100) || isNaN(input)) {
-    input = parseInt(prompt("Please enter grid size"));
-    
-    if ((input <= 0 || input > 100)){
-      alert("Please enter a value between 1 and 100");
-    } else if (isNaN(input)) {
-      alert("Please enter a valid grid size");
-    }
+  if ((input <= 0 || input > 100)){
+    alert("Please enter a value between 1 and 100");
+    input = 8;
+  } else if (isNaN(input)) {
+    alert("Please enter a valid grid size");
+    input = 8;
   }
 
   removeGrid();
@@ -53,7 +51,7 @@ function createGrid(input) {
   }
   
   // Get the grid container's CSS rule from CSSOM and set columns/rows to input value
-  let containerRules = document.styleSheets[0].cssRules[3].style;
+  let containerRules = document.styleSheets[0].cssRules[4].style;
   containerRules.setProperty('grid-template-columns', `repeat(${input}, 1fr)`);
   containerRules.setProperty('grid-template-rows', `repeat(${input}, 1fr)`);
 

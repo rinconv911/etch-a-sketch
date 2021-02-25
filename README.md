@@ -7,3 +7,5 @@ Will update with learned lessons about JS and DOM manipulation, as well as any t
 2. • Grid: Added a reset function which now takes the user's input as row/column parameter
    • Colors: Previously tried to change hover colors by using offset and client coordinates as RGB values, not ideal. Afterwards, used Math.random rounded with Math.floor and multiplied by 255
    • Stylings: Removed flex display from body so that the interface wouldn't shrink when the window was resized (better for troubleshooting with developer tools). Changed container template for the default 8x8 grid. Removed container and individual square stylings, the latter being left only with border property.
+
+3. It turns out that if you change a CSS Rule dynamically by accessing it through its index in the CSSOM, you should NOT add new rules above it in the stylesheet. And if you do, change the index in JavaScript!
