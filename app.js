@@ -25,7 +25,7 @@ function resetGrid() {
     input = parseInt(prompt("Please enter grid size"));
     
     if ((input <= 0 || input > 100)){
-      alert("Please enter a value between 0 and 100");
+      alert("Please enter a value between 1 and 100");
     } else if (isNaN(input)) {
       alert("Please enter a valid grid size");
     }
@@ -80,14 +80,18 @@ function changeColor(e) {
 function roundCorners(input) {
   let squares = container.children;
 
-  let upperLeft = container.firstElementChild;
-  let upperRight = squares[input-1];
-  let lowerLeft = squares[squares.length-input];
-  let lowerRight = container.lastElementChild;
-  
-  upperLeft.style.borderRadius = '5rem 0px 0px 0px';
-  upperRight.style.borderRadius = '0px 5rem 0px 0px';
-  lowerLeft.style.borderRadius = '0px 0px 0px 5rem';
-  lowerRight.style.borderRadius = '0px 0px 5rem 0px';
+  if (input == 1) {
+    squares[0].style.borderRadius = '5rem';
+  } else {
+    let upperLeft = container.firstElementChild;
+    let upperRight = squares[input-1];
+    let lowerLeft = squares[squares.length-input];
+    let lowerRight = container.lastElementChild;
+    
+    upperLeft.style.borderRadius = '5rem 0px 0px 0px';
+    upperRight.style.borderRadius = '0px 5rem 0px 0px';
+    lowerLeft.style.borderRadius = '0px 0px 0px 5rem';
+    lowerRight.style.borderRadius = '0px 0px 5rem 0px';
+  }
 }
 
