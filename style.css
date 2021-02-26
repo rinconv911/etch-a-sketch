@@ -52,27 +52,35 @@ button {
   text-align: center;
 }
 
-#rgb {
-  background-image: linear-gradient(rgb(255, 23, 23), rgb(23, 255, 23), rgb(23, 23, 255));  
-  border: 0.2rem solid white;
+#rainbow {
+  border-color: hsla(219, 79%, 10%, 0.8) ;
+  background-color: hsla(219, 79%, 66%, 0.8);
+  text-shadow: 0.1rem 0.1rem black;
+}
+
+#fake-button {  
+  border-color: hsla(219, 79%, 10%, 0.8) ;
+  background-color: hsla(219, 79%, 66%, 0.8);
   text-shadow: 0.1rem 0.1rem black;
 }
 
 #monochrome {
-  background-color: orangered;  
-  border: 0.1rem solid rgb(255, 69, 0);
-  text-shadow: 0.1rem 0.1rem black;
+  position: absolute;
+  height: 5rem;
+  width: 13rem;
+  opacity: 0;
 }
 
-#color-mixer {
+/*#color-mixer {
   position: absolute;
   bottom: 8.6rem;
   left: 15rem;  
-}
+}*/
 
 #blackandwhite {
-  background-color: black;  
-  border: 0.1rem solid black;
+  border-color: hsla(219, 79%, 10%, 0.8) ;
+  background-color: hsla(219, 79%, 66%, 0.8);
+  text-shadow: 0.1rem 0.1rem black;
 }
 
 #container {

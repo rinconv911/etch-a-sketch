@@ -1,15 +1,22 @@
 const container = document.getElementById('container');
 const clear = document.getElementById('clear');
 
-// Color palette-related
-let currentScheme = 'rgb';
+// Current color scheme, scheme options container
+let currentScheme = 'rainbow';
 const schemesContainer = document.getElementById('schemes-container');
-const schemeOptions = Array.from(document.getElementsByTagName('button'));
+const schemeOptions = Array.from(document.getElementsByClassName('scheme'));
 schemeOptions.forEach(option => {
   option.addEventListener('click', changeColorScheme);
 })
-let mixerColor;
 
+// Default color for color mixer and subsequent changes upon event
+let mixerColor = document.getElementById("monochrome").value;
+let mixer = document.getElementById("monochrome");
+mixer.addEventListener('change', () => {
+  mixerColor = mixer.value;
+});
+
+// UI on document load
 defaultGrid();
 clear.addEventListener('change', resetGrid);
 
@@ -60,7 +67,7 @@ function createGrid(input) {
   }
   
   // Get the grid container's CSS rule from CSSOM and set columns/rows to input value
-  let containerRules = document.styleSheets[0].cssRules[9].style;
+  let containerRules = document.styleSheets[0].cssRules[10].style;
   containerRules.setProperty('grid-template-columns', `repeat(${input}, 1fr)`);
   containerRules.setProperty('grid-template-rows', `repeat(${input}, 1fr)`);
 
@@ -75,35 +82,29 @@ function getGridArray() {
   });
 }
 
-// Change scheme variable by clicking on a scheme button
+// Called upon clicking a scheme button, changes current scheme variable
 function changeColorScheme(e) {
   if (e.target.id == 'monochrome') {
-    currentScheme = 'monochrome';
-    createColorMixer();
+    currentScheme = 'monochrome';    
   } else if (e.target.id == 'blackandwhite') {
     currentScheme = 'blackandwhite';
-      if (schemesContainer.children[3]) {
-        schemesContainer.children[3].remove();
-      }
   } else {
-    currentScheme = 'rgb';
-    if (schemesContainer.children[3]) {
-      schemesContainer.children[3].remove();
-    }
+    currentScheme = 'rainbow';
   }
-  return currentScheme;
 }
 
-// Change RGB color 
+// Change hover color 
 function changeColor(e) {
-
-  if (currentScheme === 'rgb') {
+  
+  if (currentScheme === 'rainbow') {
     let red = Math.floor(Math.random() * 255);
     let green = Math.floor(Math.random() * 255);
     let blue = Math.floor(Math.random() * 255);
     e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.5)`; 
+
   } else if (currentScheme === 'monochrome') {
     e.target.style.backgroundColor = mixerColor;
+
   } else {
     e.target.style.backgroundColor = 'black';
   }
@@ -129,7 +130,7 @@ function roundCorners(input) {
 }
 
 
-// Makes a color mixer appear when "Monochrome" color scheme is selected
+/*Makes a color mixer appear when "Monochrome" color scheme is selected
 // and retrieves its value
 function createColorMixer() {
   let mixer = document.createElement('input');
@@ -141,4 +142,4 @@ function createColorMixer() {
   mixer.addEventListener('change', () => {
     mixerColor = mixer.value;
   });
-}
+}*/

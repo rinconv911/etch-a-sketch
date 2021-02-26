@@ -9,3 +9,9 @@ Will update with learned lessons about JS and DOM manipulation, as well as any t
    • Stylings: Removed flex display from body so that the interface wouldn't shrink when the window was resized (better for troubleshooting with developer tools). Changed container template for the default 8x8 grid. Removed container and individual square stylings, the latter being left only with border property.
 
 3. It turns out that if you change a CSS Rule dynamically by accessing it through its index in the CSSOM, you should NOT add new rules above it in the stylesheet. And if you do, change the index in JavaScript!
+
+4. Tried to turn the Monochrome button into a "color" type input on click so that one wouldn't have to click on the button first and THEN on the color mixer to get a new value.
+
+ Wasn't able to find a way to do so — created a separate "color" type input and placed it over the Monochrome button. Set its opacity to 0 so that it would still be clickable, but only the Monochrome "fake button" would be visible.
+
+A sharp eye will see that clicking on it doesn't generate the "pressed button" effect.
