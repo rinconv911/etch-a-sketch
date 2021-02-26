@@ -29,7 +29,7 @@ body {
   text-align: center;
 }
 
-#schemes-div {
+#schemes-container {
   position: absolute;
   top: 32.5rem;
   left: 105rem;
@@ -60,8 +60,14 @@ button {
 
 #monochrome {
   background-color: orangered;  
-  border: 0.1rem solid orangered;
+  border: 0.1rem solid rgb(255, 69, 0);
   text-shadow: 0.1rem 0.1rem black;
+}
+
+#color-mixer {
+  position: absolute;
+  bottom: 8.6rem;
+  left: 15rem;  
 }
 
 #blackandwhite {

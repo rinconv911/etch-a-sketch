@@ -3,10 +3,12 @@ const clear = document.getElementById('clear');
 
 // Color palette-related
 let currentScheme = 'rgb';
+const schemesContainer = document.getElementById('schemes-container');
 const schemeOptions = Array.from(document.getElementsByTagName('button'));
 schemeOptions.forEach(option => {
   option.addEventListener('click', changeColorScheme);
 })
+let mixerColor;
 
 defaultGrid();
 clear.addEventListener('change', resetGrid);
@@ -73,16 +75,22 @@ function getGridArray() {
   });
 }
 
-// Change scheme variable
+// Change scheme variable by clicking on a scheme button
 function changeColorScheme(e) {
   if (e.target.id == 'monochrome') {
     currentScheme = 'monochrome';
+    createColorMixer();
   } else if (e.target.id == 'blackandwhite') {
     currentScheme = 'blackandwhite';
+      if (schemesContainer.children[3]) {
+        schemesContainer.children[3].remove();
+      }
   } else {
     currentScheme = 'rgb';
+    if (schemesContainer.children[3]) {
+      schemesContainer.children[3].remove();
+    }
   }
-
   return currentScheme;
 }
 
@@ -93,11 +101,11 @@ function changeColor(e) {
     let red = Math.floor(Math.random() * 255);
     let green = Math.floor(Math.random() * 255);
     let blue = Math.floor(Math.random() * 255);
-    e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.5)`;   
+    e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.5)`; 
   } else if (currentScheme === 'monochrome') {
-    e.target.style.backgroundColor = 'orange';
+    e.target.style.backgroundColor = mixerColor;
   } else {
-    e.target.style.backgroundColor = 'darkgray';
+    e.target.style.backgroundColor = 'black';
   }
 };
 
@@ -120,3 +128,17 @@ function roundCorners(input) {
   }
 }
 
+
+// Makes a color mixer appear when "Monochrome" color scheme is selected
+// and retrieves its value
+function createColorMixer() {
+  let mixer = document.createElement('input');
+  mixer.setAttribute('id', 'color-mixer');
+  mixer.setAttribute('type', 'color');
+  mixer.setAttribute('value', '#FF4500');
+  schemesContainer.appendChild(mixer);
+  
+  mixer.addEventListener('change', () => {
+    mixerColor = mixer.value;
+  });
+}
