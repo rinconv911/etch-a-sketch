@@ -51,7 +51,7 @@ function createGrid(input) {
   }
   
   // Get the grid container's CSS rule from CSSOM and set columns/rows to input value
-  let containerRules = document.styleSheets[0].cssRules[4].style;
+  let containerRules = document.styleSheets[0].cssRules[9].style;
   containerRules.setProperty('grid-template-columns', `repeat(${input}, 1fr)`);
   containerRules.setProperty('grid-template-rows', `repeat(${input}, 1fr)`);
 

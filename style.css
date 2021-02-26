@@ -29,6 +29,46 @@ body {
   text-align: center;
 }
 
+#color-options {
+  position: absolute;
+  top: 32.5rem;
+  left: 105rem;
+  height: 20rem;
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+button {
+  display: block;
+  height: 5rem;
+  width: 13rem;
+  border-radius: 1rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.7rem;
+  color: white;
+  text-align: center;
+}
+
+#rgb {
+  background-image: linear-gradient(rgb(255, 23, 23), rgb(23, 255, 23), rgb(23, 23, 255));  
+  border: 0.2rem solid white;
+  text-shadow: 0.1rem 0.1rem black;
+}
+
+#monochrome {
+  background-color: orangered;  
+  border: 0.1rem solid orangered;
+  text-shadow: 0.1rem 0.1rem black;
+}
+
+#blackandwhite {
+  background-color: black;  
+  border: 0.1rem solid black;
+}
+
 #container {
   margin: 5rem auto;
   height: 50rem;
