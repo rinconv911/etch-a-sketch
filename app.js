@@ -1,6 +1,13 @@
 const container = document.getElementById('container');
 const clear = document.getElementById('clear');
 
+// Color palette-related
+let currentScheme = 'rgb';
+const schemeOptions = Array.from(document.getElementsByTagName('button'));
+schemeOptions.forEach(option => {
+  option.addEventListener('click', changeColorScheme);
+})
+
 defaultGrid();
 clear.addEventListener('change', resetGrid);
 
@@ -66,12 +73,32 @@ function getGridArray() {
   });
 }
 
+// Change scheme variable
+function changeColorScheme(e) {
+  if (e.target.id == 'monochrome') {
+    currentScheme = 'monochrome';
+  } else if (e.target.id == 'blackandwhite') {
+    currentScheme = 'blackandwhite';
+  } else {
+    currentScheme = 'rgb';
+  }
+
+  return currentScheme;
+}
+
 // Change RGB color 
 function changeColor(e) {
-  let red = Math.floor(Math.random() * 255);
-  let green = Math.floor(Math.random() * 255);
-  let blue = Math.floor(Math.random() * 255);
-  e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.5)`;  
+
+  if (currentScheme === 'rgb') {
+    let red = Math.floor(Math.random() * 255);
+    let green = Math.floor(Math.random() * 255);
+    let blue = Math.floor(Math.random() * 255);
+    e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.5)`;   
+  } else if (currentScheme === 'monochrome') {
+    e.target.style.backgroundColor = 'orange';
+  } else {
+    e.target.style.backgroundColor = 'darkgray';
+  }
 };
 
 // Round the corners of the grid/squares
