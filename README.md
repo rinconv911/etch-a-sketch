@@ -15,3 +15,6 @@ Will update with learned lessons about JS and DOM manipulation, as well as any t
  Wasn't able to find a way to do so — created a separate "color" type input and placed it over the Monochrome button. Set its opacity to 0 so that it would still be clickable, but only the Monochrome "fake button" would be visible.
 
 A sharp eye will see that clicking on it doesn't generate the "pressed button" effect.
+
+5. Tried to come up with a 'click and hold' function for the drag coloring mode, but ended up going for two event listeners (thanks to bscottnz on GitHub for the inspiration!), one after the other:
+   • First, a 'click' event that calls colorByHovering only on the clicked square, then a 'mouseenter' that calls colorByDragging whenever the cursor goes into any other square and the mouse button is held down.

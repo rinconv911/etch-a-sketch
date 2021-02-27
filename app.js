@@ -3,15 +3,59 @@ const clear = document.getElementById('clear');
 
 // Current color scheme, scheme options container
 let currentScheme = 'rainbow';
+const fakeBtn = document.getElementById('fake-button')
 const schemesContainer = document.getElementById('schemes-container');
 const schemeOptions = Array.from(document.getElementsByClassName('scheme'));
-schemeOptions.forEach(option => {
-  option.addEventListener('click', changeColorScheme);
+schemeOptions.forEach(scheme => {
+  scheme.addEventListener('click', changeColorScheme);
 })
+console.log(schemeOptions);
 
-// Default color for color mixer and subsequent changes upon event
-let mixerColor = document.getElementById("monochrome").value;
-let mixer = document.getElementById("monochrome");
+function changeColorScheme(e) {
+  let scheme = e.target;
+
+  if (scheme.id == 'monochrome') {
+    currentScheme = 'monochrome';   
+    schemeOptions[0].classList.remove('selected-btn');
+    schemeOptions[2].classList.remove('selected-btn');
+    fakeBtn.classList.add('selected-btn')
+  } else if (scheme.id == 'grayscale') {
+    currentScheme = 'grayscale';
+    schemeOptions[0].classList.remove('selected-btn');
+    fakeBtn.classList.remove('selected-btn');
+    scheme.classList.add('selected-btn')
+  } else {
+    currentScheme = 'rainbow';
+    schemeOptions[1].classList.remove('selected-btn');
+    schemeOptions[2].classList.remove('selected-btn');
+    scheme.classList.add('selected-btn')
+  }
+}
+
+// Coloring mode, which changes from hover to click 'n' drag depending on button clicked
+let coloringMode = 'drag';
+const colorModes = Array.from(document.getElementsByClassName('mode'));
+colorModes.forEach(mode => {
+  mode.addEventListener('click', changeColorMode);
+});
+
+function changeColorMode (e) {
+  if (e.target.id == 'drag-button') {
+    coloringMode = 'drag';
+    colorModes[1].classList.remove('selected-btn');
+    colorModes[0].classList.add('selected-btn');
+    setArrayColorMode(coloringMode);
+  } else if (e.target.id == 'hover-button') {
+    coloringMode = 'hover';
+    colorModes[0].classList.remove('selected-btn');
+    colorModes[1].classList.add('selected-btn');
+    setArrayColorMode(coloringMode);
+  }
+}
+
+// Default color mixer and value changes upon event
+const mixer = document.getElementById("monochrome");
+let mixerColor = mixer.value;
 mixer.addEventListener('change', () => {
   mixerColor = mixer.value;
 });
@@ -29,7 +73,7 @@ function defaultGrid() {
   }
 
   roundCorners(8);
-  getGridArray();
+  setArrayColorMode(coloringMode);
 }
 
 // Ask the user for new grid size, remove previous grid and create new one
@@ -37,8 +81,8 @@ function defaultGrid() {
 function resetGrid() {
   let input = parseInt(clear.value);
 
-  if ((input <= 0 || input > 100)){
-    alert("Please enter a value between 1 and 100");
+  if ((input <= 0 || input > 35)){
+    alert("Please enter a value between 1 and 35");
     input = 8;
   } else if (isNaN(input)) {
     alert("Please enter a valid grid size");
@@ -71,30 +115,34 @@ function createGrid(input) {
   containerRules.setProperty('grid-template-columns', `repeat(${input}, 1fr)`);
   containerRules.setProperty('grid-template-rows', `repeat(${input}, 1fr)`);
 
-  getGridArray();
+  setArrayColorMode(coloringMode);
 }
 
-// Get array from all square classes and add mouseover color change event
-function getGridArray() {
+// Get array from all squares and set coloring mode
+function setArrayColorMode(coloringMode) {
   let squares = Array.from(document.getElementsByClassName('square'));
-  squares.forEach(square => {
-    square.addEventListener('mouseover', changeColor);
-  });
-}
 
-// Called upon clicking a scheme button, changes current scheme variable
-function changeColorScheme(e) {
-  if (e.target.id == 'monochrome') {
-    currentScheme = 'monochrome';    
-  } else if (e.target.id == 'blackandwhite') {
-    currentScheme = 'blackandwhite';
-  } else {
-    currentScheme = 'rainbow';
+  if (coloringMode === 'hover') {
+    squares.forEach(square => {
+      square.removeEventListener('mousedown', colorByHovering);
+      square.removeEventListener('mouseenter', colorByDragging);
+
+      square.addEventListener('mouseover', colorByHovering);
+    });
+
+  } else if (coloringMode === 'drag') {
+    squares.forEach(square => {
+      square.removeEventListener('mouseover', colorByHovering);
+
+      square.addEventListener('mousedown', colorByHovering);
+      square.addEventListener('mouseenter', colorByDragging);
+    });
   }
+
 }
 
-// Change hover color 
-function changeColor(e) {
+// Change color by hovering over square 
+function colorByHovering(e) {
   
   if (currentScheme === 'rainbow') {
     let red = Math.floor(Math.random() * 255);
@@ -106,7 +154,26 @@ function changeColor(e) {
     e.target.style.backgroundColor = mixerColor;
 
   } else {
-    e.target.style.backgroundColor = 'black';
+    e.target.style.backgroundColor = `hsl(0, 0%, 50%)`;
+  }
+};
+
+// Change color if the event target was clicked and the button held down
+// Checks whether there are > 0 mouse buttons pressed when the cursor enters a new square
+function colorByDragging(e) {
+  if (e.buttons > 0) {  
+    if (currentScheme === 'rainbow') {
+      let red = Math.floor(Math.random() * 255);
+      let green = Math.floor(Math.random() * 255);
+      let blue = Math.floor(Math.random() * 255);
+      e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.5)`; 
+  
+    } else if (currentScheme === 'monochrome') {
+      e.target.style.backgroundColor = mixerColor;
+  
+    } else {
+      e.target.style.backgroundColor = `hsl(0, 0%, 50%)`;
+    }
   }
 };
 
@@ -128,18 +195,3 @@ function roundCorners(input) {
     lowerRight.style.borderRadius = '0px 0px 5rem 0px';
   }
 }
-
-
-/*Makes a color mixer appear when "Monochrome" color scheme is selected
-// and retrieves its value
-function createColorMixer() {
-  let mixer = document.createElement('input');
-  mixer.setAttribute('id', 'color-mixer');
-  mixer.setAttribute('type', 'color');
-  mixer.setAttribute('value', '#FF4500');
-  schemesContainer.appendChild(mixer);
-  
-  mixer.addEventListener('change', () => {
-    mixerColor = mixer.value;
-  });
-}*/

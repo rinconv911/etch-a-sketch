@@ -29,7 +29,7 @@ body {
   text-align: center;
 }
 
-#schemes-container {
+.button-container {
   position: absolute;
   top: 32.5rem;
   left: 105rem;
@@ -46,16 +46,23 @@ button {
   height: 5rem;
   width: 13rem;
   border-radius: 1rem;
+  border-color: hsla(219, 79%, 10%, 0.8) ;
+  background-color: hsla(219, 79%, 66%, 0.8);
   font-family: "Roboto", sans-serif;
   font-size: 1.7rem;
   color: white;
+  text-shadow: 0.1rem 0.1rem black;
   text-align: center;
 }
 
-#rainbow {
-  border-color: hsla(219, 79%, 10%, 0.8) ;
-  background-color: hsla(219, 79%, 66%, 0.8);
-  text-shadow: 0.1rem 0.1rem black;
+.selected-btn {
+  box-shadow: 0rem 0rem 1rem 0.8rem rgba(205, 100, 237, 0.8);
+}
+
+#modes-container { 
+  top: 36rem;
+  left: 32rem;
+  height: 13rem;
 }
 
 #fake-button {  
@@ -69,18 +76,6 @@ button {
   height: 5rem;
   width: 13rem;
   opacity: 0;
-}
-
-/*#color-mixer {
-  position: absolute;
-  bottom: 8.6rem;
-  left: 15rem;  
-}*/
-
-#blackandwhite {
-  border-color: hsla(219, 79%, 10%, 0.8) ;
-  background-color: hsla(219, 79%, 66%, 0.8);
-  text-shadow: 0.1rem 0.1rem black;
 }
 
 #container {

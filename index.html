@@ -11,14 +11,19 @@
 	<body>
 		<div id="input-div">
 			<p id="grid-prompt">Enter your grid size</p>
-			<input type="text" id="clear" placeholder="0-100" autocomplete="off" onfocus="this.value=''">
+			<input type="text" id="clear" placeholder="0-35" autocomplete="off" onfocus="this.value=''">
 		</div>
 
-		<div id="schemes-container">
-			<button class="scheme" id="rainbow">Rainbow</button>
+		<div class="button-container" id="modes-container">
+			<button class="mode selected-btn" id="drag-button">Click 'n' Hold</button>
+			<button class="mode" id="hover-button">Hovering</button>
+		</div>
+
+		<div class="button-container">
+			<button class="scheme selected-btn" id="rainbow">Rainbow</button>
 			<button id="fake-button">Monochrome</button>
 			<input class="scheme" type="color" id="monochrome">
-			<button class="scheme" id="blackandwhite">Black & White</button>
+			<button class="scheme" id="grayscale">Grayscale</button>
 		</div>
 		
 		<div id="container">
