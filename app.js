@@ -191,7 +191,17 @@ function colorByHovering(e) {
     e.target.style.backgroundColor = mixerColor;
 
   } else {
-    e.target.style.backgroundColor = `hsl(0, 0%, 50%)`;
+
+    if (this.style.backgroundColor.match(/rgba/)) {
+      let opacity = parseFloat(this.style.backgroundColor.slice(-4, -1));
+      this.style.backgroundColor = `rgba(0, 0, 0, ${opacity + 0.1})`;
+
+    } else if (this.style.backgroundColor == 'rgb(0, 0, 0)') {
+      return;
+
+    } else {
+      this.style.backgroundColor = `rgba(0, 0, 0, 0.1)`; 
+    }
   }
 };
 
@@ -203,10 +213,22 @@ function colorByDragging(e) {
       let green = Math.floor(Math.random() * 255);
       let blue = Math.floor(Math.random() * 255);
       e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.5)`;   
+
     } else if (currentScheme === 'monochrome') {
       e.target.style.backgroundColor = mixerColor;  
+
     } else {
-      e.target.style.backgroundColor = `hsl(0, 0%, 50%)`;
+
+      if (this.style.backgroundColor.match(/rgba/)) {
+        let opacity = parseFloat(this.style.backgroundColor.slice(-4, -1));
+        this.style.backgroundColor = `rgba(0, 0, 0, ${opacity + 0.1})`;
+  
+      } else if (this.style.backgroundColor == 'rgb(0, 0, 0)') {
+        return;
+  
+      } else {
+        this.style.backgroundColor = `rgba(0, 0, 0, 0.1)`; 
+      }
     }
   }
 };
