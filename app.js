@@ -54,15 +54,15 @@ function changeColorScheme(e) {
 // Adds and removes glow to current coloring mode and color scheme
 function manageGlow(array, id) {
   for (i = 0; i < array.length; i++) {
-    if (array[i].id != id) {
-      array[i].classList.remove('selected-btn');
-    } else {
+    if (array[i].id == id) {
       array[i].classList.add('selected-btn');
+    } else {
+      array[i].classList.remove('selected-btn');
     }
 
     if (id == 'monochrome') {
       fakeBtn.classList.add('selected-btn');
-    } else {
+    } else if (id == 'monochrome' || array[i].parentNode.id == 'schemes-container'){
       fakeBtn.classList.remove('selected-btn');
     }
   }
