@@ -16,7 +16,7 @@ body {
   font-size: 2rem;
 }
 
-#clear {
+#reset-button {
   display: block;
   height: 5rem;
   width: 10rem;
@@ -27,6 +27,14 @@ body {
   font-size: 2rem;
   color: white;
   text-align: center;
+}
+
+#clear-button {
+  position: absolute;
+  left: 107.5rem;
+  top: 7.2rem;
+  height: 5.5rem;
+  width: 10rem;
 }
 
 .button-container {

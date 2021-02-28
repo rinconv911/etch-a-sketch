@@ -1,5 +1,6 @@
 const container = document.getElementById('container');
-const clear = document.getElementById('clear');
+const reset = document.getElementById('reset-button');
+const clear = document.getElementById('clear-button');
 
 // Default color mixer and value changes upon event
 const mixer = document.getElementById("monochrome");
@@ -89,7 +90,8 @@ function roundCorners(input) {
 
 // Document load UI
 defaultGrid();
-clear.addEventListener('change', resetGrid);
+reset.addEventListener('change', resetGrid);
+clear.addEventListener('click', resetGrid);
 
 // Create default 8x8 grid
 function defaultGrid() {  
@@ -105,20 +107,28 @@ function defaultGrid() {
 
 // Ask the user for new grid size, remove previous grid and create new one
 // Make sure the input is of type number, and between 0 and 100
-function resetGrid() {
-  let input = parseInt(clear.value);
+function resetGrid(e) {
+  if (e.target.id == 'reset-button') {
+    let input = parseInt(reset.value);
 
-  if ((input <= 0 || input > 35)){
-    alert("Please enter a value between 1 and 35");
-    input = 8;
-  } else if (isNaN(input)) {
-    alert("Please enter a valid grid size");
-    input = 8;
+    if ((input <= 0 || input > 35)){
+      alert("Please enter a value between 1 and 35");
+      input = 8;
+    } else if (isNaN(input)) {
+      alert("Please enter a valid grid size");
+      input = 8;
+    }
+
+    removeGrid();
+    createGrid(input);
+    roundCorners(input);
+
+  } else if (e.target.id == 'clear-button') {
+    let squares = Array.from(document.getElementsByClassName('square'));
+    squares.forEach(square => {
+      square.style.removeProperty('background-color');
+    });
   }
-
-  removeGrid();
-  createGrid(input);
-  roundCorners(input);
 } 
 
 // Loop through the grid container's children and remove each one
