@@ -127,7 +127,7 @@ function resetGrid(e) {
   } else if (e.target.id == 'clear-button') {
     let squares = Array.from(document.getElementsByClassName('square'));
     squares.forEach(square => {
-      square.style.removeProperty('background-color');
+      square.style.backgroundColor = `rgb(255, 255, 255)`;
     });
   }
 } 
