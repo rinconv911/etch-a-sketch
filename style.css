@@ -9,15 +9,54 @@ body {
   background-color: #467D7E;
 }
 
+#game-title {  
+  position: relative;
+  top: 6rem;
+  width: 50rem;
+  transform: rotate(-20deg);
+  float: left;
+  text-align: center; 
+  font-size: 7rem;
+  font-weight: bold;
+  color: #4b322c;
+  text-shadow: -0.3rem 0.3rem 0.3rem #dabe63;
+  opacity: 0;
+}
+
+#game-title.loaded {
+  animation: display 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes display {
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+
+  50% {
+    scale: 1.1;
+  }
+
+  70% {
+    scale: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 #input-div {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  margin: auto auto auto 62.5rem;
   font-size: 2rem;
   font-weight: bold;
   color: #4b322c;
   text-shadow: 0rem 0rem 0.5rem #F4E4AD;
+  width: 25rem;
 }
 
 #reset-button {
@@ -98,7 +137,7 @@ button {
 }
 
 #container {
-  margin: 5rem auto;
+  margin: 5rem auto auto 0rem;
   height: 50rem;
   width: 50rem;
   display: grid;    

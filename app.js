@@ -1,6 +1,12 @@
+const body = document.body;
 const container = document.getElementById('container');
 const reset = document.getElementById('reset-button');
 const clear = document.getElementById('clear-button');
+
+body.onload = () => {
+  document.getElementById('game-title').classList.add('loaded')
+};
+
 
 // Default color mixer and value changes upon event
 const mixer = document.getElementById("monochrome");
@@ -150,7 +156,7 @@ function createGrid(input) {
   }
   
   // Get the grid container's CSS rule from CSSOM and set columns/rows to input value
-  let containerRules = document.styleSheets[0].cssRules[12].style;
+  let containerRules = document.styleSheets[0].cssRules[15].style;
   containerRules.setProperty('grid-template-columns', `repeat(${input}, 1fr)`);
   containerRules.setProperty('grid-template-rows', `repeat(${input}, 1fr)`);
 
