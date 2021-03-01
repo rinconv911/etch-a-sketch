@@ -98,6 +98,7 @@ function defaultGrid() {
   for (i = 0; i < 64; i++) {
     let square = document.createElement('div');
     square.className = 'square';
+    square.style.backgroundColor = `rgb(255, 255, 255)`;
     container.appendChild(square);
   }
 
@@ -144,11 +145,12 @@ function createGrid(input) {
   for (i = 0; i < gridSize; i++) {
     let square = document.createElement('div');
     square.className = 'square';
+    square.style.backgroundColor = `rgb(255, 255, 255)`;
     container.appendChild(square);     
   }
   
   // Get the grid container's CSS rule from CSSOM and set columns/rows to input value
-  let containerRules = document.styleSheets[0].cssRules[10].style;
+  let containerRules = document.styleSheets[0].cssRules[12].style;
   containerRules.setProperty('grid-template-columns', `repeat(${input}, 1fr)`);
   containerRules.setProperty('grid-template-rows', `repeat(${input}, 1fr)`);
 
@@ -200,7 +202,8 @@ function colorByHovering(e) {
       return;
 
     } else {
-      this.style.backgroundColor = `rgba(0, 0, 0, 0.1)`; 
+      this.style.backgroundColor = `rgba(0, 0, 0, 0.3)`;
+      container.style.backgroundColor = `rgb(255, 255, 255)`;
     }
   }
 };
